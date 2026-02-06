@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: another-alert
+  namespace: monitoring-ns    # matches Prometheus
+spec:
+  groups:
+  - name: new.group
+    rules:
+    - alert: testAlert
+      expr: up{job="baremetal-node-exporter"} == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Node down: {{ $labels.instance }}"
+        description: "{{ $labels.instance }} has been unreachable for 2 minutes."
