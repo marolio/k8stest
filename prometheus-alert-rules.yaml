@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: baremetal-node-alerts
-  namespace: monitoring-ns
+  namespace: monitoring-ns    # matches Prometheus
 spec:
   groups:
   - name: baremetal.rules
